@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GoogleApiWrapper, Map, InfoWindow, Marker } from "google-maps-react";
+import CurrentLocation from "./Map";
 
 export function MapContainer(props) {
   const [mapOptions, setMapOptions] = useState({
@@ -26,23 +27,10 @@ export function MapContainer(props) {
     }
   };
 
-  const mapStyles = {
-    width: "100%",
-    height: "100%",
-  };
-
   return (
     <div>
-      <Map
-        google={props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={{
-          lat: 23.461024,
-          lng: 91.180645,
-        }}
-      >
-        <Marker onClick={onMarkerClick} name={"Kandirpar, Cumilla"} />
+      <CurrentLocation centerAroundCurrentLocation google={props.google}>
+        <Marker onClick={onMarkerClick} name={"Current Location"} />
         <InfoWindow
           marker={mapOptions.activeMarker}
           visible={mapOptions.showingInfoWindow}
@@ -52,7 +40,7 @@ export function MapContainer(props) {
             <h2>{mapOptions.selectedPlace.name}</h2>
           </div>
         </InfoWindow>
-      </Map>
+      </CurrentLocation>
     </div>
   );
 }
