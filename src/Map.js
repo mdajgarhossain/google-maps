@@ -40,6 +40,7 @@ export class CurrentLocation extends Component {
 
     if (map) {
       let center = new maps.LatLng(current.lat, current.lng);
+      // console.log(center);
       map.panTo(center);
     }
   }
